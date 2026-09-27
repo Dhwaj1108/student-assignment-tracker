@@ -29,7 +29,9 @@ student-assignment-tracker/
 ├── index.html   # Page content and form
 ├── styles.css   # Layout, colors, and responsive styles
 ├── app.js       # Assignment logic and local storage
-└── README.md    # Project information and setup
+├── README.md    # Project information and setup
+├── LICENSE      # MIT License
+└── .gitignore   # Operating system files to ignore
 ```
 
 ## What I learned
