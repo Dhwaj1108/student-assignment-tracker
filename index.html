@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f5ef" />
+    <meta
+      name="description"
+      content="A simple assignment tracker to keep your classes and deadlines organized."
+    />
+    <title>DueNote — Student Assignment Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="DueNote home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="4" y="5" width="24" height="23" rx="7" fill="currentColor" />
+              <path d="M11 4v5M21 4v5M10 14h12M11 20h4" stroke="#F6F5EF" stroke-width="2.2" stroke-linecap="round" />
+              <circle cx="22" cy="21" r="3" fill="#C5EE8F" />
+            </svg>
+          </span>
+          <span>due<span class="brand-light">note</span></span>
+        </a>
+
+        <div class="sidebar-label">YOUR SPACE</div>
+        <nav class="filter-nav" aria-label="Filter assignments">
+          <button class="nav-item is-active" type="button" data-filter="all" aria-pressed="true">
+            <span class="nav-icon" aria-hidden="true">▦</span>
+            <span>All assignments</span>
+            <span class="nav-count" id="all-count">0</span>
+          </button>
+          <button class="nav-item" type="button" data-filter="upcoming" aria-pressed="false">
+            <span class="nav-icon" aria-hidden="true">◷</span>
+            <span>Upcoming</span>
+            <span class="nav-count" id="upcoming-count">0</span>
+          </button>
+          <button class="nav-item" type="button" data-filter="completed" aria-pressed="false">
+            <span class="nav-icon" aria-hidden="true">✓</span>
+            <span>Completed</span>
+            <span class="nav-count" id="completed-count">0</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-note">
+          <span class="note-spark" aria-hidden="true">✳</span>
+          <p>A little progress<br />adds up to a lot.</p>
+        </div>
+
+        <div class="sidebar-footer">
+          <span class="save-dot" aria-hidden="true"></span>
+          Saved on this device
+        </div>
+      </aside>
+
+      <main class="main-content" id="top">
+        <header class="topbar">
+          <div class="mobile-brand" aria-hidden="true">due<span>note</span></div>
+          <p class="today-label" id="today-label"></p>
+          <div class="profile-chip" aria-label="Your study space">
+            <span class="profile-avatar" aria-hidden="true">✦</span>
+            <span>My study space</span>
+          </div>
+        </header>
+
+        <section class="welcome-section" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow"><span class="eyebrow-line"></span> YOUR SEMESTER, IN ONE PLACE</p>
+            <h1 id="page-title">Make space for<br /><span>your best work.</span></h1>
+            <p class="welcome-copy">Keep your assignments in view and your mind on what matters.</p>
+          </div>
+          <div class="welcome-doodle" aria-hidden="true">
+            <span class="doodle-sun">✳</span>
+            <span class="doodle-line"></span>
+            <span class="doodle-label">one thing<br />at a time</span>
+          </div>
+        </section>
+
+        <section class="stats-grid" aria-label="Assignment overview">
+          <article class="stat-card stat-total">
+            <div class="stat-topline"><span>Total assignments</span><span class="stat-icon" aria-hidden="true">▤</span></div>
+            <p class="stat-number" id="total-stat">0</p>
+            <p class="stat-footnote">on your list</p>
+          </article>
+          <article class="stat-card stat-due">
+            <div class="stat-topline"><span>Due this week</span><span class="stat-icon" aria-hidden="true">◷</span></div>
+            <p class="stat-number" id="due-stat">0</p>
+            <p class="stat-footnote">a good time to get started</p>
+          </article>
+          <article class="stat-card stat-done">
+            <div class="stat-topline"><span>Completed</span><span class="stat-icon" aria-hidden="true">✓</span></div>
+            <p class="stat-number" id="completed-stat">0</p>
+            <div class="progress-row">
+              <div class="progress-track" role="progressbar" aria-label="Assignments completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar">
+                <span id="progress-fill"></span>
+              </div>
+              <span id="progress-label">0%</span>
+            </div>
+          </article>
+        </section>
+
+        <section class="workspace-grid" aria-label="Manage assignments">
+          <section class="panel add-panel" aria-labelledby="form-title">
+            <div class="panel-heading">
+              <div>
+                <p class="panel-kicker">START HERE</p>
+                <h2 id="form-title">Add an assignment</h2>
+              </div>
+              <span class="heading-icon" aria-hidden="true">＋</span>
+            </div>
+
+            <form id="assignment-form">
+              <label class="field-label" for="title">Assignment name</label>
+              <input id="title" name="title" type="text" maxlength="80" placeholder="e.g. Reading response" required />
+
+              <label class="field-label" for="course">Course</label>
+              <input id="course" name="course" type="text" maxlength="40" placeholder="e.g. Introduction to Biology" required />
+
+              <div class="form-row">
+                <div class="field-group">
+                  <label class="field-label" for="due-date">Due date</label>
+                  <input id="due-date" name="dueDate" type="date" required />
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="priority">Priority</label>
+                  <select id="priority" name="priority">
+                    <option value="normal">Normal</option>
+                    <option value="high">High</option>
+                    <option value="low">Low</option>
+                  </select>
+                </div>
+              </div>
+
+              <button class="primary-button" type="submit">
+                <span>Add to my list</span><span aria-hidden="true">↗</span>
+              </button>
+            </form>
+            <p class="form-hint"><span aria-hidden="true">✦</span> You can change the status whenever you like.</p>
+          </section>
+
+          <section class="panel list-panel" aria-labelledby="list-title">
+            <div class="list-heading">
+              <div>
+                <p class="panel-kicker">YOUR WORK, YOUR PACE</p>
+                <div class="list-title-row">
+                  <h2 id="list-title">Assignments</h2>
+                  <span class="task-total" id="visible-count">0</span>
+                </div>
+              </div>
+              <button class="text-button" id="clear-samples" type="button" hidden>Remove sample tasks</button>
+            </div>
+
+            <div class="list-tools">
+              <label class="search-box">
+                <span aria-hidden="true">⌕</span>
+                <span class="sr-only">Search assignments</span>
+                <input id="search" type="search" placeholder="Search your list" />
+              </label>
+              <label class="sort-label" for="sort">Sort</label>
+              <select id="sort" class="sort-select" aria-label="Sort assignments">
+                <option value="date">Due date</option>
+                <option value="priority">Priority</option>
+                <option value="course">Course</option>
+              </select>
+            </div>
+
+            <div class="list-divider"></div>
+            <ul class="assignment-list" id="assignment-list" aria-live="polite" aria-relevant="additions removals"></ul>
+            <div class="empty-state" id="empty-state" hidden>
+              <span class="empty-icon" aria-hidden="true">✳</span>
+              <h3 id="empty-title">A fresh page.</h3>
+              <p id="empty-copy">Add your next assignment and give it a date. You’ve got this.</p>
+            </div>
+            <p class="list-footnote" id="list-footnote">Your assignments are saved privately in this browser.</p>
+          </section>
+        </section>
+
+        <footer class="page-footer">
+          <span>Small steps count.</span>
+          <span>Built for students, one deadline at a time <span aria-hidden="true">✳</span></span>
+        </footer>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
